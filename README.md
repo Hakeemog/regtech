@@ -27,6 +27,7 @@ This Terraform configuration provisions a secure infrastructure using AWS servic
 - Resources such as subnets and EKS clusters are tagged with environment identifiers (e.g., production) to improve resource tracking and cost allocation.
   
 # Steps to Provision the Infrastructure
+
 ## Prerequisites
 - Terraform (v1.0+)
 - AWS CLI with proper credentials
@@ -35,6 +36,18 @@ This Terraform configuration provisions a secure infrastructure using AWS servic
   
 ### Step 1: Clone the Repository
 ###   Step 2: Initialize Terraform
-Run the following command to initialize the Terraform configuration:
-Step 3: Plan the Infrastructure
-Execute the plan command to review the infrastructure that Terraform will provision:
+See response:  https://github.com/Hakeemog/regtech/blob/screenshot/terraform-init.png
+### Step 3: Plan the Infrastructure:  https://github.com/Hakeemog/regtech/blob/screenshot/terraform-plan
+Execute the plan command to review the infrastructure that Terraform will provision. After reviewing the plan, apply the configuration to provision the infrastructure using terraform apply --auto-approve.
+All the infrastructure highlighted in th plan are then provision
+### Step 4: Access the EKS Cluster
+After provisioning the EKS cluster, configure kubectl to access it using the AWS CLI with the command: aws eks --region us-east-2 update-kubeconfig --name regtech-eks
+see provisioned cluster: https://github.com/Hakeemog/regtech/blob/screenshot/eks-cluster.png?raw=true
+### Step 5: Verify the Cluster: https://github.com/Hakeemog/regtech/blob/screenshot/nodes.png?raw=true
+
+## Additional Information
+Scaling: The EKS cluster is set up with autoscaling enabled via the Cluster Autoscaler module.
+
+# Monitoring: 
+
+To enable monitoring, I integrated Prometheus and graana into the cluster
