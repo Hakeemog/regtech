@@ -33,7 +33,7 @@ see provisioned cluster: https://github.com/Hakeemog/regtech/blob/screenshot/eks
 ## Additional Information 
 Scaling: The EKS cluster is set up with autoscaling enabled via the Cluster Autoscaler module.
 
-# Security Measures (Deliverable 2)
+# Security Measures (Deliverable 3)
 1. Private and Public Subnets
 - Private Subnets: Only accessible via internal networking and NAT Gateway for outbound internet access. These subnets are designed to host sensitive resources like the EKS worker nodes.
 - Public Subnets: These are exposed to the internet and are used for resources like the EKS control plane or load balancers.
