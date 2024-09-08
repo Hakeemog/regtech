@@ -45,8 +45,8 @@ Execute the plan command to review the infrastructure that Terraform will provis
 All the infrastructure highlighted in th plan are then provision
 ### Step 4: Access the EKS Cluster
 After provisioning the EKS cluster, configure kubectl to access it using the AWS CLI with the command: aws eks --region us-east-2 update-kubeconfig --name regtech-eks
-see provisioned cluster: https://github.com/Hakeemog/regtech/blob/screenshot/eks-cluster.png?raw=true
-### Step 5: Verify the Cluster: https://github.com/Hakeemog/regtech/blob/screenshot/nodes.png?raw=true
+see provisioned cluster: https://github.com/Hakeemog/regtech/blob/screenshot/eks-cluster.png
+### Step 5: Verify the Cluster: https://github.com/Hakeemog/regtech/blob/screenshot/nodes.png
 
 ## Additional Information
 Scaling: The EKS cluster is set up with autoscaling enabled via the Cluster Autoscaler module.
