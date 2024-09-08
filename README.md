@@ -9,25 +9,7 @@ This Terraform configuration provisions a secure infrastructure using AWS servic
 1. Amazon Virtual Private Cloud (VPC): A secure network environment.
 2. Amazon Elastic Kubernetes Service (EKS): A managed Kubernetes cluster with private and public access control.
 3. Amazon Elastic Container Registry (ECR): A secure repository for Docker images.
-   
-##Security Measures
-1. Private and Public Subnets
-- Private Subnets: Only accessible via internal networking and NAT Gateway for outbound internet access. These subnets are designed to host sensitive resources like the EKS worker nodes.
-- Public Subnets: These are exposed to the internet and are used for resources like the EKS control plane or load balancers.
-2. NAT Gateway
-- A single NAT Gateway is enabled to route outbound traffic from the private subnets to the internet, enhancing security by limiting direct internet exposure of private resources.
-3. Security Groups
-- EKS worker nodes are secured with specific ingress rules to allow traffic from the EKS control plane only on certain ports, such as port 15017 for Istio webhooks.
-4. DNS Support and Hostnames
-- DNS support and hostnames are enabled within the VPC, which facilitates communication between resources using domain names rather than IP addresses, improving manageability.
-5. IAM Roles for Service Accounts (IRSA)
-- IRSA is enabled for the EKS cluster, allowing the Kubernetes pods to assume IAM roles securely, which minimizes the need for providing long-lived AWS credentials in the application code.
-6. Cluster Endpoint Access Control
-- The EKS cluster is configured with private access to ensure sensitive management operations can only be performed within the VPC.
-- Public access is allowed for specific operations, but private access remains the primary control.
-7. Tagging for Resource Management
-- Resources such as subnets and EKS clusters are tagged with environment identifiers (e.g., production) to improve resource tracking and cost allocation.
-  
+     
 # Steps to Provision the Infrastructure
 
 ## Prerequisites
@@ -50,6 +32,44 @@ see provisioned cluster: https://github.com/Hakeemog/regtech/blob/screenshot/eks
 
 ## Additional Information 
 Scaling: The EKS cluster is set up with autoscaling enabled via the Cluster Autoscaler module.
+
+# Security Measures (Deliverable 2)
+1. Private and Public Subnets
+- Private Subnets: Only accessible via internal networking and NAT Gateway for outbound internet access. These subnets are designed to host sensitive resources like the EKS worker nodes.
+- Public Subnets: These are exposed to the internet and are used for resources like the EKS control plane or load balancers.
+2. NAT Gateway
+- A single NAT Gateway is enabled to route outbound traffic from the private subnets to the internet, enhancing security by limiting direct internet exposure of private resources.
+3. Security Groups
+- EKS worker nodes are secured with specific ingress rules to allow traffic from the EKS control plane only on certain ports, such as port 15017 for Istio webhooks.
+4. DNS Support and Hostnames
+- DNS support and hostnames are enabled within the VPC, which facilitates communication between resources using domain names rather than IP addresses, improving manageability.
+5. IAM Roles for Service Accounts (IRSA)
+- IRSA is enabled for the EKS cluster, allowing the Kubernetes pods to assume IAM roles securely, which minimizes the need for providing long-lived AWS credentials in the application code.
+6. Cluster Endpoint Access Control
+- The EKS cluster is configured with private access to ensure sensitive management operations can only be performed within the VPC.
+- Public access is allowed for specific operations, but private access remains the primary control.
+7. Tagging for Resource Management
+- Resources such as subnets and EKS clusters are tagged with environment identifiers (e.g., production) to improve resource tracking and cost allocation.
+## To ensure the infrastructure is compliant with GDPR and PCI-DSS.
+- I set up TLS (Transport Layer Security) in the ingress.yaml. With TLS settings, the following security measures
+
+### Data Encryption:
+TLS encrypts the data transmitted between the client (such as a web browser) and the server (your application). This ensures that sensitive information, such as login credentials, personal data, or payment details, is protected from eavesdropping or interception by malicious actors.
+
+### Data Integrity:
+TLS ensures that the data sent over the network is not tampered with or altered during transmission. If any data modification is attempted, the connection will be flagged as insecure, and the transmission will be terminated.
+
+### Authentication:
+The TLS configuration uses a certificate (associated with secretName: regtech-app-tls) that proves the identity of the server to the client. This prevents "man-in-the-middle" attacks where an attacker might try to impersonate the server to steal data.
+Protection Against Man-in-the-Middle (MITM) Attacks:
+With TLS, clients can verify the authenticity of the server they are connecting to. This helps protect against MITM attacks where an attacker tries to intercept and possibly alter the communication between a client and a server.
+
+### Compliance with Security Standards:
+Many security standards and regulations, such as GDPR, HIPAA, and PCI-DSS, require encryption of data in transit. Enabling TLS in the Ingress helps meet these compliance requirements.
+
+### Improved User Trust:
+Websites and applications that use TLS (with HTTPS) are seen as more trustworthy by users. Modern browsers will flag sites without TLS as "Not Secure," potentially leading to a loss of user trust and traffic.
+
 
 # Monitoring (Deliverable 4)
 
