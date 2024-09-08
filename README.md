@@ -39,7 +39,7 @@ This Terraform configuration provisions a secure infrastructure using AWS servic
 ### Step 1: Clone the Repository
 ###   Step 2: Initialize Terraform
 See response:  https://github.com/Hakeemog/regtech/blob/screenshot/terraform-init.png
- https://github.com/Hakeemog/regtech/blob/screenshot/terraform-init-2.png?raw=true
+ https://github.com/Hakeemog/regtech/blob/screenshot/terraform-init-2.png
 ### Step 3: Plan the Infrastructure:  https://github.com/Hakeemog/regtech/blob/screenshot/terraform-plan
 Execute the plan command to review the infrastructure that Terraform will provision. After reviewing the plan, apply the configuration to provision the infrastructure using terraform apply --auto-approve.
 All the infrastructure highlighted in th plan are then provision
