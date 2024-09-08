@@ -2,7 +2,7 @@
 
 ## Overview
 
-The infrastructure design can be seen here:
+The infrastructure design can be seen here: https://github.com/Hakeemog/regtech/blob/master/Screenshot%202024-09-08%20011301.png
 
 This Terraform configuration provisions a secure infrastructure using AWS services. The key components include:
 
