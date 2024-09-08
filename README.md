@@ -87,9 +87,9 @@ See response: https://github.com/Hakeemog/regtech/blob/screenshot/prometheus.png
   Prometheus UI and show it in a user-friendly manner. So I'll edit the svc of grafana to loadbalancer as above so I can access the UI
   See response:   https://github.com/Hakeemog/regtech/blob/screenshot/grafana-svc-clusterIP.png
                   https://github.com/Hakeemog/regtech/blob/screenshot/grafana-svc-loadbalancer.png
+- The Grafana LoadBalancer is also exposed and the link accessed
+  See response:  https://github.com/Hakeemog/regtech/blob/screenshot/grafana-ui.png
+- Obtained the login password with the command. Note that the username is admin:                                                                                                          
+  kubectl get secret --namespace prometheus stable-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo              
 
-- Install Prometheus and Grafana using Helm: Step-
--  Prometheus server processes and stores metrics data
-- Alert manager sends alerts to any systems/channels
-- Grafana visualize scraped data in UI
 
