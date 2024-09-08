@@ -53,4 +53,5 @@ Scaling: The EKS cluster is set up with autoscaling enabled via the Cluster Auto
 
 # Monitoring: 
 
-To enable monitoring, I integrated Prometheus and graana into the cluster
+To enable monitoring, I integrated Prometheus, grafana nd loki into the cluster
+
