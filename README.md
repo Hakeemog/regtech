@@ -1,4 +1,4 @@
-# Infrastructure Design, Provisioning and Security Measures
+# Infrastructure Design, Provisioning and Security Measures (Deliverable 1)
 
 ## Overview
 
@@ -48,10 +48,48 @@ After provisioning the EKS cluster, configure kubectl to access it using the AWS
 see provisioned cluster: https://github.com/Hakeemog/regtech/blob/screenshot/eks-cluster.png
 ### Step 5: Verify the Cluster: https://github.com/Hakeemog/regtech/blob/screenshot/nodes.png
 
-## Additional Information
+## Additional Information 
 Scaling: The EKS cluster is set up with autoscaling enabled via the Cluster Autoscaler module.
 
-# Monitoring: 
+# Monitoring (Deliverable 4)
 
-To enable monitoring, I integrated Prometheus, grafana nd loki into the cluster
+To enable monitoring, I integrated Prometheus, grafana and loki into the cluster
+## Procedures
+### Step 1:
+- Install helm:                                                                                                                                                     $ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+$ chmod 700 get_helm.sh
+$ ./get_helm.sh
+### step 2:
+We need to add the Helm Stable Charts for your local client. Execute the below command:
+helm repo add stable https://charts.helm.sh/stable
+
+### Step3: Add Prometheus Helm repo, then create a prometheus namespace where prometheus would be installed
+- helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+- kubectl create namespace prometheus
+The above command is used to install kube-Prometheus-stack. The helm repo kube-stack-Prometheus comes with a Grafana deployment embedded ( as the default one ).
+See response: https://github.com/Hakeemog/regtech/blob/screenshot/prometheus.png
+- To check whether Prometheus is installed or not use the command: kubectl get pods -n prometheus
+  see response: https://github.com/Hakeemog/regtech/blob/screenshot/prometheus-pods.png
+- To check the services file (svc) of the Prometheus: kubectl get svc -n prometheus
+  see response:  https://github.com/Hakeemog/regtech/blob/screenshot/prometheus-svc.png
+  From the above image, it is seen that grafana comes along with Prometheus as the stable version. This output is conformation that our Prometheus is installed 
+  successfully there is no need of installing Grafana as a separate tool it comes along with Prometheus
+  ### Step 4: Let’s expose Prometheus and Grafan to the external world
+- There are 2 ways to expose which are through Node Port and through LoadBalancer. I am going to use the LoadBalancer to expose. To attach the load balancer I'll 
+  change from ClusterIP to LoadBalancer by editing the service with the command
+  kubectl edit svc stable-kube-prometheus-sta-prometheus -n prometheus
+  see response: https://github.com/Hakeemog/regtech/blob/master/svc-edited.png
+                https://github.com/Hakeemog/regtech/blob/screenshot/clusterIP-svc.png
+                https://github.com/Hakeemog/regtech/blob/screenshot/loadbalancer-svc.png
+- After changing to loadbalancer, prometheus is accessible in the ui using the loadbalancer link
+  see response: https://github.com/Hakeemog/regtech/blob/screenshot/prometheus-board.png
+- we can use a Prometheus UI for monitoring the EKS but the UI of Prometheus is not user friendly.Grafana is integrated and will extract the matrix from the 
+  Prometheus UI and show it in a user-friendly manner. So I'll edit the svc of grafana to loadbalancer as above so I can access the UI
+  See response:   https://github.com/Hakeemog/regtech/blob/screenshot/grafana-svc-clusterIP.png
+                  https://github.com/Hakeemog/regtech/blob/screenshot/grafana-svc-loadbalancer.png
+
+- Install Prometheus and Grafana using Helm: Step-
+-  Prometheus server processes and stores metrics data
+- Alert manager sends alerts to any systems/channels
+- Grafana visualize scraped data in UI
 
