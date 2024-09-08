@@ -1,6 +1,8 @@
-# Infrastructure Provisioning and Security Measures
+# Infrastructure Design, Provisioning and Security Measures
 
 ## Overview
+
+The infrastructure design can be seen here: https://github.com/Hakeemog/regtech/blob/screenshot/Screenshot%202024-09-08%20011301.png?raw=true
 
 This Terraform configuration provisions a secure infrastructure using AWS services. The key components include:
 
