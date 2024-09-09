@@ -24,7 +24,7 @@ See response:  https://github.com/Hakeemog/regtech/blob/screenshot/terraform-ini
  https://github.com/Hakeemog/regtech/blob/screenshot/terraform-init-2.png
 ### Step 3: Plan the Infrastructure:  https://github.com/Hakeemog/regtech/blob/screenshot/terraform-plan
 Execute the plan command to review the infrastructure that Terraform will provision. After reviewing the plan, apply the configuration to provision the infrastructure using terraform apply --auto-approve.
-All the infrastructure highlighted in th plan are then provision
+All the infrastructure highlighted in th plan are then provisioned
 ### Step 4: Access the EKS Cluster
 After provisioning the EKS cluster, configure kubectl to access it using the AWS CLI with the command: aws eks --region us-east-2 update-kubeconfig --name regtech-eks
 see provisioned cluster: https://github.com/Hakeemog/regtech/blob/screenshot/eks-cluster.png
@@ -32,6 +32,7 @@ see provisioned cluster: https://github.com/Hakeemog/regtech/blob/screenshot/eks
 
 ## Additional Information 
 Scaling: The EKS cluster is set up with autoscaling enabled via the Cluster Autoscaler module.
+Horizontal Pod Autoscaling (HPA) is also set up in the deployment config
 
 # Security Measures (Deliverable 3)
 1. Private and Public Subnets
@@ -51,7 +52,7 @@ Scaling: The EKS cluster is set up with autoscaling enabled via the Cluster Auto
 7. Tagging for Resource Management
 - Resources such as subnets and EKS clusters are tagged with environment identifiers (e.g., production) to improve resource tracking and cost allocation.
 ## To ensure the infrastructure is compliant with GDPR and PCI-DSS.
-- I set up TLS (Transport Layer Security) in the ingress.yaml. With TLS settings, the following security measures
+- I set up TLS (Transport Layer Security) in the ingress.yaml. With TLS settings, the following security measures are achieved with TLS
 
 ### Data Encryption:
 TLS encrypts the data transmitted between the client (such as a web browser) and the server (your application). This ensures that sensitive information, such as login credentials, personal data, or payment details, is protected from eavesdropping or interception by malicious actors.
